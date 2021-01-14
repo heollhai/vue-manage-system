@@ -173,7 +173,9 @@ export default {
       ];
       // this.echartData.video.xData = order.date;
       // 取出series中的name部分
+      console.log(keyArray, "获取所有的名字");
       let keyArray = Object.keys(order.data[0]);
+
       keyArray.forEach(key => {
         this.echartData.order.series.push({
           name: this.keyDecorate(key),
