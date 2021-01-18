@@ -3,7 +3,7 @@
     <el-tag
       v-for="tag in tageList"
       :key="tag.path"
-      :closable="tag.path !== '/'"
+      :closable="tag.path !== '/home'"
       @close="CLOSETAB(tag)"
       @click="tagPath(tag.path)"
       :effect="$route.path === tag.path ? 'dark' : 'plain'"
@@ -35,8 +35,7 @@ export default {
 
 <style lang="scss" scoped="scoped">
 .mian {
-  margin-left: 20px;
-  margin-top: 20px;
+  margin: 20px 0 20px 20px;
   .el-tag {
     margin-right: 20px;
     cursor: pointer;

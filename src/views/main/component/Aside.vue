@@ -40,23 +40,23 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from "vuex"; //创建基于某个命名空间辅助函数
-const { mapMutations, mapState } = createNamespacedHelpers("Crumbs"); //方法二 ;
+import { mapMutations, mapState } from "vuex"; //方法二 ;
 export default {
   computed: {
-    ...mapState(["collapseType"]),
+    ...mapState("Crumbs", ["collapseType"]),
+    ...mapState("Longin", ["menu"]),
     onAisdeMenuChilider() {
-      return this.asideMenu.filter(item => !item.children);
+      return this.menu.filter(item => !item.children);
     },
     hasAisdeMenuChilider() {
-      return this.asideMenu.filter(item => item.children);
+      return this.menu.filter(item => item.children);
     }
   },
   mounted() {
     console.log(this.collapseType, "collapseType");
   },
   methods: {
-    ...mapMutations(["SELCTMENT"]),
+    ...mapMutations("Crumbs", ["SELCTMENT"]),
     selctMent(item) {
       this.$router.push(item.path);
       this.SELCTMENT(item);
@@ -65,39 +65,7 @@ export default {
   },
   data() {
     return {
-      asideMenu: [
-        {
-          path: "/",
-          label: "首页",
-          icon: "iconfont icon-shouye icon"
-        },
-        {
-          path: "/VideoManage",
-          label: "视屏管理",
-          icon: "iconfont icon-BAI-shiping icon"
-        },
-        {
-          path: "/User",
-          label: "用户管理",
-          icon: "iconfont icon-yonghu icon"
-        },
-        {
-          label: "其他",
-          icon: "iconfont icon-qita icon",
-          children: [
-            {
-              path: "/pageOne",
-              label: "页面1",
-              icon: "iconfont icon-yemian icon"
-            },
-            {
-              path: "/pageTwo",
-              label: "页面2",
-              icon: "iconfont icon-yemian1 icon"
-            }
-          ]
-        }
-      ]
+      asideMenu: []
     };
   }
 };

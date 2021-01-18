@@ -3,7 +3,7 @@
     <div class="headerPath">
       <i class="iconfont icon-caidan headerCss" @click="COLLAPSETYPE"></i>
       <el-breadcrumb separator="/" class="crumbs">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item
           v-if="currentMenu"
           :to="{ path: currentMenu.path }"
@@ -12,25 +12,30 @@
       </el-breadcrumb>
     </div>
     <el-dropdown trigger="click" size="mini">
-      <span class="el-dropdown-link">
-        <i class="iconfont icon-123 headerCss el-icon--right"></i>
-      </span>
+      <i class="iconfont icon-123 headerCss "></i>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>用户中心</el-dropdown-item>
-        <el-dropdown-item>退出</el-dropdown-item>
+        <el-dropdown-item @click.native="loginOut">退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </div>
 </template>
 <script>
-import { createNamespacedHelpers } from "vuex"; //创建基于某个命名空间辅助函数
-const { mapState, mapMutations } = createNamespacedHelpers("Crumbs"); //方法二 ;
+import { mapState, mapMutations } from "vuex";
 export default {
   computed: {
-    ...mapState(["menu", "currentMenu"])
+    ...mapState("Crumbs", ["currentMenu"])
   },
   methods: {
-    ...mapMutations(["COLLAPSETYPE"])
+    ...mapMutations("Crumbs", ["COLLAPSETYPE"]),
+    ...mapMutations("Longin", ["CLEARMENU"]),
+    ...mapMutations("User", ["CLEAR_TOKEN"]),
+    loginOut() {
+      this.CLEARMENU(); // 清除cookie  清除路由菜单
+      this.CLEAR_TOKEN(); //清除  cookie
+      this.$router.push("/login");
+      location.reload(); //页面刷新
+    }
   }
 };
 </script>
@@ -44,7 +49,6 @@ export default {
   .headerCss {
     font-size: 30px;
     color: $theme-bgcolor;
-    border: none;
   }
   .headerPath {
     display: flex;

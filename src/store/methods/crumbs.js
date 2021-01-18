@@ -3,6 +3,7 @@ export default {
   state: {
     currentMenu: null,
     collapseType: false,
+    menu: [],
     tageList: [
       {
         path: "/",

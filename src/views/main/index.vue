@@ -35,7 +35,7 @@ export default {
   background-color: #333;
 }
 </style>
-<style lang="scss">
+<style lang="scss" scoped="scoped">
 .el-header {
   .el-breadcrumb__item {
     .el-breadcrumb__inner {
@@ -47,5 +47,8 @@ export default {
       }
     }
   }
+}
+.el-main {
+  padding: 0 20px;
 }
 </style>
