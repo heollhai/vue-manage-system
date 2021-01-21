@@ -1,9 +1,12 @@
 import require from "./config.js";
 
-export function getHomeDate() {
+export function getHomeDate(a) {
   return require({
     url: "/home/getData",
-    method: "get"
+    method: "get",
+    params: {
+      a
+    }
   });
 }
 export function userGetUser(limt) {

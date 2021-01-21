@@ -1,22 +1,58 @@
 <!-- 
-	inline: Boolean,   		表单是否为行内样式
-	form: Object,			表单里面的字段   v-model   绑定的值
-	formLabel: Array 		表单里面的参数
- 
+	inline			表单是是不是行内样式
+	config			宽度  可以不填
+		传值方式:config: {
+					width: "80px"
+				  },
+	rules				表单的验证规则		
+		传值方式:
+		rules: {
+		  username: [
+		    { required: true, message: "请输入账号", trigger: "blur" },
+		    { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+		  ],
+		  password: [		
+		    { required: true, message: "请输入密码", trigger: "blur" },
+		    { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+		  ]
+		}
+    form				表单的 v-model  需要绑定的值
+		传值方式:
+		loginFrom: {			必须要有		有多少字段有多少个值
+		  username: "",			
+		  password: ""
+		},
+	formLabel	
+		传值方式:
+			formLabel: [
+			  {
+			    label: "账号 :",					可以没有		
+			    model: "username",		主要用于		必须有		使用 form[item.model]	绑定值   必须有
+			    rules: "password"		验证		可以没有	
+			  },
+			  {
+			    label: "密码 :",
+			    model: "password",
+			    rules: "password",
+			    type: "password"
+			  }
+			],
+	
  -->
-
 <template>
   <el-form
     ref="form"
     :inline="inline"
     :label-width="config !== undefined ? config.width : '100px'"
+    :rules="rules"
+    :model="form"
   >
     <el-form-item
       v-for="item in formLabel"
       :label="item.label"
       :key="item.model"
+      :prop="item.rules"
     >
-      <!-- .substring(0, item.label.length - 1) -->
       <el-input
         v-model="form[item.model]"
         :placeholder="
@@ -73,7 +109,18 @@ export default {
     inline: Boolean,
     form: Object,
     config: Object,
-    formLabel: Array
+    formLabel: Array,
+    rules: Object
+  },
+  data() {
+    return {
+      modelValue: {}
+    };
+  },
+  methods: {
+    getModel() {
+      this.$emit("getModel", this.form);
+    }
   }
 };
 </script>

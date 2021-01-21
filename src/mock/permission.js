@@ -2,7 +2,6 @@ import Mock from "mockjs";
 export default {
   getMenu: config => {
     const { username, password } = JSON.parse(config.body);
-    console.log(JSON.parse(config.body));
     // 先判断用户是否存在
     if (username === "admin" || username === "wp") {
       // 判断账号和密码是否对应

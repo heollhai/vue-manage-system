@@ -151,8 +151,9 @@ export default {
     Echart
   },
   mounted() {
-    getHomeDate().then(res => {
-      console.log(res, "oooo");
+	  let a = [1,3,4,5,6]
+    getHomeDate(a).then(res => {
+      // console.log(res, "oooo");
       //订单折线图
       const order = res.data.data.orderData;
       this.echartData.order.xData = order.date;
