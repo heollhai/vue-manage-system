@@ -14,9 +14,7 @@
           <p><span>上次登录地点:</span><span>深圳</span></p>
         </div>
       </el-card>
-      <el-card shadow="always" style="margin-top: 20px;">
-        总是显示
-      </el-card>
+      <el-card shadow="always" style="margin-top: 20px"> 总是显示 </el-card>
     </el-col>
     <el-col :span="16">
       <div class="num">
@@ -31,7 +29,7 @@
       <echart
         ref="echart"
         shadow="always"
-        style="height: 260px;"
+        style="height: 260px"
         :chartData="echartData.order"
       ></echart>
 
@@ -39,13 +37,13 @@
         <echart
           shadow="always"
           ref="echarts"
-          style="height: 260px;width: 48%;"
+          style="height: 260px; width: 48%"
           :chartData="echartData.user"
         ></echart>
         <echart
           ref="echart"
           shadow="always"
-          style="height: 260px;width: 48%;"
+          style="height: 260px; width: 48%"
           :chartData="echartData.video"
           :isAxisChart="false"
         ></echart>
@@ -61,7 +59,7 @@ const { mapState } = createNamespacedHelpers("Crumbs");
 import Echart from "@/components/Echatr";
 export default {
   computed: {
-    ...mapState(["collapseType"])
+    ...mapState(["collapseType"]),
   },
   watch: {
     collapseType() {
@@ -71,7 +69,7 @@ export default {
         this.$refs.echart.resizeChart();
         this.$refs.echarts.resizeChart();
       }, 300);
-    }
+    },
   },
   data() {
     return {
@@ -84,9 +82,9 @@ export default {
             trigger: "axis",
             axisPointer: {
               // 坐标轴指示器，坐标轴触发有效
-              type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
-            }
-          }
+              type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
+            },
+          },
         },
         user: {
           xData: [],
@@ -95,31 +93,31 @@ export default {
           title: {
             text: "天气情况统计",
             subtext: "虚构数据",
-            left: "center"
+            left: "center",
           },
           tooltip: {
             trigger: "axis",
             axisPointer: {
               // 坐标轴指示器，坐标轴触发有效
-              type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
-            }
-          }
+              type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
+            },
+          },
         },
         video: {
           title: {
             text: "某站点用户访问来源",
             subtext: "纯属虚构",
-            left: "center"
+            left: "center",
           },
           tooltip: {
             show: true,
             trigger: "item",
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
+            formatter: "{a} <br/>{b} : {c} ({d}%)",
           },
           legend: {
             orient: "vertical",
             left: "left",
-            data: ["直接访问", "邮件营销", "联盟广告", "视频广告", "搜索引擎"]
+            data: ["直接访问", "邮件营销", "联盟广告", "视频广告", "搜索引擎"],
           },
           series: [
             {
@@ -132,8 +130,8 @@ export default {
                 { value: 310, name: "邮件营销" },
                 { value: 234, name: "联盟广告" },
                 { value: 135, name: "视频广告" },
-                { value: 1548, name: "搜索引擎" }
-              ]
+                { value: 1548, name: "搜索引擎" },
+              ],
               // emphasis: {
               //   itemStyle: {
               //     shadowBlur: 10,
@@ -141,17 +139,17 @@ export default {
               //     shadowColor: "rgba(0, 0, 0, 0.5)"
               //   }
               // }
-            }
-          ]
-        }
-      }
+            },
+          ],
+        },
+      },
     };
   },
   components: {
-    Echart
+    Echart,
   },
   mounted() {
-    getHomeDate().then(res => {
+    getHomeDate().then((res) => {
       // console.log(res, "oooo");
       //订单折线图
       const order = res.data.data.orderData;
@@ -160,29 +158,29 @@ export default {
       this.echartData.user.series = [
         {
           data: [120, 200, 150, 80, 70, 110, 130],
-          type: "bar"
+          type: "bar",
         },
         {
           data: [120, 200, 150, 80, 70, 110, 130],
-          type: "bar"
+          type: "bar",
         },
         {
           data: [120, 200, 150, 80, 70, 110, 130],
-          type: "bar"
-        }
+          type: "bar",
+        },
       ];
       // this.echartData.video.xData = order.date;
       // 取出series中的name部分
       console.log(keyArray, "获取所有的名字");
       let keyArray = Object.keys(order.data[0]);
 
-      keyArray.forEach(key => {
+      keyArray.forEach((key) => {
         this.echartData.order.series.push({
           name: this.keyDecorate(key),
-          data: order.data.map(item => {
+          data: order.data.map((item) => {
             return item[key];
           }),
-          type: "line"
+          type: "line",
         });
       });
     });
@@ -211,8 +209,8 @@ export default {
           break;
       }
       return key;
-    }
-  }
+    },
+  },
 };
 </script>
 
